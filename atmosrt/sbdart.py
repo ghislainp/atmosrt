@@ -171,6 +171,7 @@ def translate(config):
         'lower_limit': 'WLINF',
         'upper_limit': 'WLSUP',
         'resolution': 'WLINC',
+        'disable_emission': 'NOTHRM',
 
         # 'strat_aod': 'TAERST',
         # 'model': 'NF',
