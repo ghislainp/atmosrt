@@ -62,5 +62,5 @@ setup(
     scripts=['src/sbdart/sbdart.py', 'src/smarts/smarts.py'],
     packages=['atmosrt'],
     include_package_data=True,
-    install_requires=['numpy', 'pandas', 'msgpack-python', 'trimesh', 'snowoptics'],
+    install_requires=['numpy', 'pandas', 'msgpack-python', 'snowoptics'],
 )

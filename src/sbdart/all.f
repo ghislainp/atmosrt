@@ -23130,8 +23130,8 @@ c=======================================================================
       subroutine satcloud(nz,ncldz,lcld,t,rhcld,wh,idb)
       use params, only: kr, tzero
       implicit none
-      integer :: j, jj, lbot, ltop, idb,i,nz,ncldz
-      real(kr) ::  t(*), wh(*), lcld(*), a, rhcld
+      integer :: j, jj, lbot, ltop, idb,i,nz,ncldz, lcld(*)
+      real(kr) ::  t(*), wh(*), a, rhcld
 c
 c purpose: modify the watervapor density inside clouds to have a
 c          relative humidity of RHCLD.
@@ -23189,8 +23189,8 @@ c=======================================================================
       subroutine saturate(nz,ncldz,lcld,z,t,rhcld,wh,idb)
       use params, only: kr, tzero
       implicit none
-      integer :: lbot, ltop, ncldz, j, idb, i, nz, jj
-      real(kr) :: t(*),z(*),wh(*),lcld(*),
+      integer :: lbot, ltop, ncldz, j, idb, i, nz, jj,lcld(*)
+      real(kr) :: t(*),z(*),wh(*),
      &     cldfac, clrfac, den1, den2, du, dz, tst1, tst2, wvpn,
      &     a, wvp, zbot, ztop, rhcld, wvpclr, wvpcld
 
