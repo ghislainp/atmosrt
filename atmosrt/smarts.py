@@ -1,6 +1,10 @@
 
 
 import os
+import sys
+from pathlib import Path
+
+
 import numpy
 import pandas
 from contextlib import contextmanager
@@ -11,7 +15,7 @@ from atmosrt import settings
 resources = ['Albedo', 'CIE_data', 'Gases', 'Solar']
 resource_path = _rtm.get_data('smarts')
 input_file = 'smarts295.inp.txt'
-command = 'smarts.py'
+command = sys.executable + " " + str(Path(__file__).parent / 'smarts-exe.py')
 output_file = 'smarts295.ext.txt'
 output_log = 'log.txt'
 output_headers = 1

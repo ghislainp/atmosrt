@@ -23,6 +23,9 @@
 
 from collections.abc import Iterable
 from contextlib import contextmanager
+from pathlib import Path
+import sys
+
 
 import numpy
 import pandas
@@ -31,10 +34,10 @@ import pandas
 from atmosrt import _rtm
 from atmosrt import settings
 
-import libsbdart
+import libsbdart   # raise an error if not accessible
 
 input_file = 'INPUT'
-command = 'sbdart.py'
+command = sys.executable + " " + str(Path(__file__).parent / 'sbdart-exe.py')
 header_lines = 3
 default_out = 'out.txt'
 
@@ -238,7 +241,7 @@ def translate(config):
             elif param in optional:
                 pass
             else:
-                print("x %s" % param)  # Unrecognized!
+                print("Unrecognized parameter %s" % param)  # Unrecognized!
 
         processed.append(param)
 

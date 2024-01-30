@@ -45,7 +45,7 @@ libsmarts = Extension(name='libsmarts_295',
 
 setup(
     name='AtmosRT',
-    version='0.5.4',
+    version='0.5.7',
     author='Ghislain Picard',
     author_email='ghipicard@gmail.com',
     license='GPLv3',
