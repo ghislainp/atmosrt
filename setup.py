@@ -45,7 +45,7 @@ libsmarts = Extension(name='libsmarts_295',
 
 setup(
     name='AtmosRT',
-    version='0.5.8',
+    version='0.5.9',
     author='Ghislain Picard',
     author_email='ghipicard@gmail.com',
     license='GPLv3',
@@ -59,7 +59,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://github.com/ghislainp/atmosrt",
     ext_modules=[libsbdart, libsmarts],
-    scripts=['src/sbdart/sbdart.py', 'src/smarts/smarts.py'],
+    scripts=['atmosrt/sbdart-exe.py', 'atmosrt/smarts-exe.py'],
     packages=['atmosrt'],
     include_package_data=True,
     install_requires=['numpy', 'pandas', 'msgpack-python', 'snowoptics'],
