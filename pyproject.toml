@@ -1,0 +1,10 @@
+[build-system]
+requires = [
+  "setuptools>=68",
+  "wheel",
+  "numpy>=1.23",
+]
+build-backend = "setuptools.build_meta"
+
+# Using a minimal pyproject keeps builds PEP 517/518 compatible (pip build isolation)
+# while still driving the build logic from setup.py (custom f2py build_ext).

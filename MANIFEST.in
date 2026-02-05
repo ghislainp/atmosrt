@@ -1,4 +1,4 @@
 include README.md
 include license.txt
-recursive-include bin *
-recursive-include rtm/data *
+recursive-include atmosrt/data *
+recursive-include src *.f *.F *.f90 *.F90 *.pyf *.c *.h *.txt *.md *.sh

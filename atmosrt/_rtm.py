@@ -22,11 +22,12 @@
 """
 
 import os
+import pickle
 import re
 import shutil
 import subprocess
 import tempfile
-import pickle
+
 from atmosrt import settings
 
 
@@ -35,7 +36,7 @@ class RTMError(Exception): pass
 
 MAX_FILE_CHARS = 42
 CACHE_DIR = 'cached'
-PRIMARY = ['description', 'longitude', 'latitude']
+PRIMARY = ['description']
 SECONDARY = ['year', 'month', 'day']
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -61,7 +62,7 @@ class Model():
     """The parent of what you probably need to use"""
 
     def __init__(self, userconfig=None, target='.', cleanup=True, **kwargs):
-        required = ['description', 'latitude', 'longitude', 'time']
+        required = ['description']
         self.config = {k: v for k, v in settings.defaults.items() if k in required}
         if userconfig:
             self.config.update(userconfig)
@@ -80,7 +81,7 @@ class Working(object):
 
         # set up the directory variables
         primary = _vars_to_file(model.config[v] for v in PRIMARY)
-        secondary = _vars_to_file(getattr(model.config['time'], v) for v in SECONDARY)
+        secondary = _vars_to_file(getattr(model.config['time'], v) for v in SECONDARY) if model.config.get('time') else 'notime'
         rundir = _vars_to_file([str(hash(model))])
 
         self.cleanup = model.cleanup

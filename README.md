@@ -43,6 +43,20 @@ spec = model.spectrum()
 
 ```
 
+alternatively, SBdart simulations can be run for a given Solar Zenith Angle (SZA):
+
+```python
+import atmosrt
+
+model = atmosrt.SBdart(atmosrt.settings.pollution['moderate'],
+			SZA=50.0,)
+
+spec = model.spectrum()
+
+```
+
+
+
 Documentation
 -------------
 

@@ -29,9 +29,9 @@ defaults = {
     'solar_constant': 1367,  # W/m^2 in space
 
     'season': 'summer',  # summer or winter
-    'time': parsedt('2012-10-11 12:00:00 -0500'),  # specifying tz is important!
-    'latitude': 44,  # degrees, north-positive
-    'longitude': 283.7,  # degrees, east-positive
+    # 'time': parsedt('2012-10-11 12:00:00 -0500'),  # specifying tz is important!
+    # 'latitude': 44,  # degrees, north-positive
+    # 'longitude': 283.7,  # degrees, east-positive
     'elevation': 0,  # metres above sea level
     'surface_type': 'vegetation',  # see docs for valid options
     'single_scattering_albedo': 0.8,

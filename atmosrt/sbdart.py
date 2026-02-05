@@ -21,20 +21,16 @@
     along with PyRTM.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import sys
 from collections.abc import Iterable
 from contextlib import contextmanager
 from pathlib import Path
-import sys
 
-
+import libsbdart  # raise an error if not accessible
 import numpy
 import pandas
 
-
-from atmosrt import _rtm
-from atmosrt import settings
-
-import libsbdart   # raise an error if not accessible
+from atmosrt import _rtm, settings
 
 input_file = 'INPUT'
 command = sys.executable + " " + str(Path(__file__).parent / 'sbdart-exe.py')
@@ -151,6 +147,7 @@ def translate(config):
         'latitude': 'ALAT',
         'longitude': 'ALON',
         'pressure': 'PBAR',
+        'SZA': 'SZA',
 
         'single_scattering_albedo': 'WBAER',
         'aerosol_asymmetry': 'GBAER',
@@ -230,18 +227,19 @@ def translate(config):
     translated.update(hard_code)
 
     def addItem(param, val):
-        if param not in unsupported:
-            if param in direct:
-                translated.update({direct[param]: val})
-            elif param in convert:
-                for d in convert[param][0]:
-                    if d not in processed:
-                        addItem(d)
-                translated.update(convert[param][1](val))
-            elif param in optional:
-                pass
-            else:
-                print("Unrecognized parameter %s" % param)  # Unrecognized!
+        if param in unsupported:
+            pass
+        elif param in direct:
+            translated.update({direct[param]: val})
+        elif param in convert:
+            for d in convert[param][0]:
+                if d not in processed:
+                    addItem(d)
+            translated.update(convert[param][1](val))
+        elif param in optional:
+            pass
+        else:
+            raise Exception("Unrecognized parameter %s" % param)  # Unrecognized!
 
         processed.append(param)
 
@@ -249,6 +247,16 @@ def translate(config):
         if param not in processed:
             addItem(param, val)
 
+    if 'IDAY' in translated:
+        if 'ALAT' not in translated or 'ALON' not in translated:
+            raise Exception("If you specify time, you must also specify latitude and longitude")
+    elif 'ALAT' in translated or 'ALON' in translated:
+            raise Exception("If you specify latitude and longitude, you must also specify time")
+    else:
+        if 'SZA' not in translated:
+            raise Exception("If you specify no time, you must specify SZA")
+        translated['IDAY'] = 0
+    
     return translated
 
 
