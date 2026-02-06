@@ -34,7 +34,9 @@ jobs:
         env:
           # Install a NumPy that provides the oldest ABI compatible wheels
           # for each Python version (helps produce widely-compatible wheels).
-          CIBW_BEFORE_BUILD: python -m pip install oldest-supported-numpy
+          CIBW_BEFORE_BUILD: |
+            python -m pip install oldest-supported-numpy
+            python -m pip install "meson>=1.4" ninja
 
           # f2py builds require a Fortran compiler.
           # manylinux build images vary by policy/version; install gfortran via yum or dnf.
