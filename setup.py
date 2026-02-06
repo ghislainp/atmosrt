@@ -112,9 +112,11 @@ setup(
     version="0.5.9",
     author="Ghislain Picard",
     author_email="ghipicard@gmail.com",
-    license="GPLv3",
+    # Use an SPDX license expression (preferred by modern packaging tooling).
+    # The project header states GPLv3-or-later.
+    license="GPL-3.0-or-later",
+    license_files=("license.txt",),
     classifiers=[
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.9",
@@ -139,3 +141,7 @@ setup(
     ],
     cmdclass={"build_ext": F2pyBuildExt},
 )
+
+
+
+
