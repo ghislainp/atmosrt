@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-  "setuptools>=68",
+  "setuptools>=77.0.0",
   "wheel",
   "numpy>=1.23",
 ]
@@ -8,3 +8,49 @@ build-backend = "setuptools.build_meta"
 
 # Using a minimal pyproject keeps builds PEP 517/518 compatible (pip build isolation)
 # while still driving the build logic from setup.py (custom f2py build_ext).
+
+[project]
+name = "AtmosRT"
+version = "0.6.0"
+description = "Atmospheric Radiative Transfer Model interface"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
+authors = [
+  {name = "Ghislain Picard", email = "ghipicard@gmail.com"},
+]
+
+# SPDX license expression (preferred by modern packaging tooling).
+license = "GPL-3.0-or-later"
+license-files = ["license.txt"]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "msgpack",
+  "snowoptics",
+]
+
+[project.urls]
+Homepage = "https://github.com/ghislainp/atmosrt"
+
+[tool.setuptools]
+include-package-data = false
+script-files = [
+  "atmosrt/sbdart-exe.py",
+  "atmosrt/smarts-exe.py",
+]
+
+[tool.setuptools.packages.find]
+exclude = ["test", "tests", "src", "build"]
+
+[tool.setuptools.package-data]
+atmosrt = ["data/**/*"]

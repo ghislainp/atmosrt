@@ -34,8 +34,11 @@ import sys
 import sysconfig
 from pathlib import Path
 
-from setuptools import Extension, find_packages, setup
+from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
+
+if sys.version_info < (3, 10):
+    raise RuntimeError("AtmosRT requires Python >= 3.10")
 
 
 class F2pyBuildExt(build_ext):
@@ -108,33 +111,6 @@ class F2pyBuildExt(build_ext):
 
 
 setup(
-    name="AtmosRT",
-    version="0.5.9",
-    author="Ghislain Picard",
-    author_email="ghipicard@gmail.com",
-    # Use an SPDX license expression (preferred by modern packaging tooling).
-    # The project header states GPLv3-or-later.
-    license="GPL-3.0-or-later",
-    license_files=("license.txt",),
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13",
-    ],
-    description="Atmospheric Radiative Transfer Model interface",
-    long_description=Path("README.md").read_text(encoding="utf-8"),
-    long_description_content_type="text/markdown",
-    url="https://github.com/ghislainp/atmosrt",
-    packages=find_packages(exclude=("test", "tests", "src", "build")),
-    package_data={"atmosrt": ["data/**/*"]},
-    include_package_data=False,
-    scripts=["atmosrt/sbdart-exe.py", "atmosrt/smarts-exe.py"],
-    install_requires=["numpy", "pandas", "msgpack", "snowoptics"],
-    python_requires=">=3.9",
     ext_modules=[
         Extension("libsbdart", sources=[]),
         Extension("libsmarts_295", sources=[]),
